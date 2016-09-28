@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  #  Scope
+  default_scope -> { order(created_at: :asc) }
 
   #  before_save
   before_save { self.email = email.downcase }
