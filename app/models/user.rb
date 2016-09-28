@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+
+  #  before_save
+  before_save { self.email = email.downcase }
+
   #  Validation
   #  username
   VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\Z/
