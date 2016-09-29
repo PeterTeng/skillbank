@@ -4,7 +4,7 @@
       %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %i.fa.fa-bars
-      %a.navbar-brand.page-scroll{:href => "#page-top"} SkillBank
+      = link_to "SkillBank", root_path, class: "navbar-brand"
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         - unless logged_in?
