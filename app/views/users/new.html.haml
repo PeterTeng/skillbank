@@ -1,13 +1,19 @@
-= form_for @user do |f|
-  .form-group
-    = f.text_field :username, class: "form-control", placeholder: :username, required: ""
-  .form-group
-    = f.email_field :email, class: "form-control", placeholder: :email, required: ""
-  .form-group
-    = f.password_field :password, class: "form-control", placeholder: :password, required: ""
-  .form-group
-    = f.password_field :password_confirmation, class: "form-control", placeholder: :password_confirmation, required: ""
-  .form-group
-    = f.submit "Register", class: "btn btn-primary"
-%p
-  %small Already have an account?
+%section
+  .container
+    .row
+      .col-lg-12
+        %h1 Sign up
+        = form_for @user do |f|
+          .form-group
+            = f.text_field :username, class: "form-control", placeholder: :username, required: ""
+          .form-group
+            = f.email_field :email, class: "form-control", placeholder: :email, required: ""
+          .form-group
+            = f.password_field :password, class: "form-control", placeholder: :password, required: ""
+          .form-group
+            = f.password_field :password_confirmation, class: "form-control", placeholder: :password_confirmation, required: ""
+          .form-group
+            = f.submit "Register", class: "btn btn-primary"
+        %p
+          %small Already have an account?
+        = link_to "Log in", login_path

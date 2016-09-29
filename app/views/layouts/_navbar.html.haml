@@ -1,0 +1,19 @@
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %i.fa.fa-bars
+      %a.navbar-brand.page-scroll{:href => "#page-top"} SkillBank
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        - unless logged_in?
+          %li
+            = link_to "Sign up", signup_path
+          %li
+            = link_to "Login", login_path
+        - else
+          %li
+            = link_to "Profile", user_path(current_user)
+          %li
+            = link_to "Logout", logout_path, :method => :delete
