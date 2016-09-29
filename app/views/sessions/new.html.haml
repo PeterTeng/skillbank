@@ -1,0 +1,9 @@
+= form_for(:session, url: login_path) do |f|
+  .form-group
+    = f.email_field :email, class: "form-control", placeholder: :email, required: ""
+  .form-group
+    = f.password_field :password, class: "form-control", placeholder: :password, required: ""
+  = f.submit "Login", class: "btn btn-primary"
+  %p
+    %small Do not have an account?
+  = link_to "Create an account", signup_path
