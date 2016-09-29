@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  #  Association
+  has_many :skills
+  has_many :endorsements
+  has_many :endorsed_skills, through: :endorsements, source: :skill
 
   #  attr_accessor
   attr_accessor :remember_token
