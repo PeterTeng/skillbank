@@ -14,7 +14,6 @@ class SkillsController < ApplicationController
       if @skill_user.save
         redirect_to @user
       else
-        binding.pry
         render 'welcome/index'
       end
     else
