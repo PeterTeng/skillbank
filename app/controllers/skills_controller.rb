@@ -1,4 +1,8 @@
 class SkillsController < ApplicationController
+  def index
+    @skills = Skill.all
+  end
+
   def create
     @user = User.find(params[:user_id])
     @skill = @user.skills.build(skill_params)
