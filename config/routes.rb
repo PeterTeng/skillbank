@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "welcome#index"
 
   resources :users, only: [:show, :new, :create]
-  resources :skills, only: [:index, :new, :create]
+  resources :skills, only: [:index, :show, :new, :create]
 
   get "signup", to: "users#new"
   get "login", to: "sessions#new"
