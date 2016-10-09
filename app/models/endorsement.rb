@@ -1,5 +1,5 @@
 class Endorsement < ActiveRecord::Base
   #  Association
   belongs_to :user
-  belongs_to :skill
+  belongs_to :user_skill
 end

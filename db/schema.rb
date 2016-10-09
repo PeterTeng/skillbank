@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 20161006035306) do
 
   create_table "endorsements", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "skill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_skill_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "endorsements", ["skill_id"], name: "index_endorsements_on_skill_id", using: :btree
-  add_index "endorsements", ["user_id", "skill_id"], name: "index_endorsements_on_user_id_and_skill_id", unique: true, using: :btree
+  add_index "endorsements", ["user_id", "user_skill_id"], name: "index_endorsements_on_user_id_and_user_skill_id", unique: true, using: :btree
   add_index "endorsements", ["user_id"], name: "index_endorsements_on_user_id", using: :btree
+  add_index "endorsements", ["user_skill_id"], name: "index_endorsements_on_user_skill_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
