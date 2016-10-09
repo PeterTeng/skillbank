@@ -3,6 +3,11 @@ class SkillsController < ApplicationController
     @skills = Skill.all
   end
 
+  def show
+    @skill = Skill.find(params[:id])
+    @skill_users = @skill.users
+  end
+
   def create
     #  Params :user_id passed from form in users/show with hidden_field_tag
     @user = User.find(params[:user_id])
