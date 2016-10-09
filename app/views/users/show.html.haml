@@ -1,6 +1,28 @@
-%section
+%section.bg-primary
   .container
     .row
       .col-lg-12.text-center
-        %h1= @user.username
-        %h1= @user.email
+        %h4= @user.username
+        %h4= @user.email
+%header
+  .container
+    .row
+      .col-lg-12
+        %img.img-responsive{:alt => "", :src => "https://placeholdit.imgix.net/~text?txtsize=33&txt=200%C3%97200&w=200&h=200"}/
+%section.bg-warning.pd-b-xl
+  .container
+    .row
+      .col-lg-12
+        %h1= "#{@user.username}'s Skills"
+        - @user_skills.each do |skill|
+          %p= skill.name
+%section
+  .container
+    .row
+      .col-lg-12
+        %h1 Endorse Skill
+        = form_for @skill do |f|
+          .form-group
+            = f.text_field :name, class: "form-control", placeholder: "Skill name", required: ""
+            = hidden_field_tag :user_id, @user.id
+            = f.submit "Endorse", class: "btn btn-primary"

@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: :show
 
   def show
+    @user_skills = @user.skills
+    @skill = @user.skills.build
   end
 
   def new
