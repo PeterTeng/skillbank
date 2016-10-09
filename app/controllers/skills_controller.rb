@@ -4,6 +4,7 @@ class SkillsController < ApplicationController
   end
 
   def create
+    #  Params :user_id passed from form in users/show with hidden_field_tag
     @user = User.find(params[:user_id])
     @skill = @user.skills.build(skill_params)
     if @skill.save
