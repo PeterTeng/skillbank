@@ -4,6 +4,7 @@ class EndorsementsController < ApplicationController
     if @endorsement.save
       redirect_to :back
     else
+      redirect_to user_path(current_user)
     end
   end
 
