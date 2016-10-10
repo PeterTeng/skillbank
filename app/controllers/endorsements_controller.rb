@@ -1,4 +1,4 @@
-class EndorsementsController < ApplicationController
+class EndorsementsController < BaseController
   def create
     @endorsement = Endorsement.create(user_id: current_user.id, user_skill_id: params[:user_skill_id])
     if @endorsement.save
