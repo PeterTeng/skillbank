@@ -27,7 +27,22 @@
                 %tr
                   %td= skill.name
                   - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
-                  %td= Endorsement.where(user_skill_id: @user_skill_id).count
+                  %td
+                    %button.btn.btn-info.btn-xs{"data-target" => "#m#{@user_skill_id}", "data-toggle" => "modal", :type => "button"} Endorsed by
+                    = "#{pluralize(Endorsement.where(user_skill_id: @user_skill_id).count, "person")}." 
+                    %div{id: "m#{@user_skill_id}", class: "modal fade", role: "dialog"}
+                      .modal-dialog
+                        .modal-content
+                          .modal-header
+                            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                            %h4.modal-title Endorsed by...
+                          .modal-body
+                            - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
+                              %p= User.find(ids.user_id).username
+                          .modal-footer
+                            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                  -# - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
+                  -#   %td= User.find(ids.user_id).username
                   - unless current_user == @user
                     %td
                       = form_for @endorsement do |f|
