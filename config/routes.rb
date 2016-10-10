@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :new, :create]
   resources :skills, only: [:index, :show, :new, :create]
+  resources :endorsements, only: [:create, :destroy]
 
   get "signup", to: "users#new"
   get "login", to: "sessions#new"
