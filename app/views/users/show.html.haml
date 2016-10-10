@@ -14,15 +14,30 @@
     .row
       .col-lg-12
         %h1= "#{@user.username}'s Skills"
-        - @user_skills.each do |skill|
-          %p= skill.name
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Count
+              %th Action
+          %tbody
+            - @user_skills.each do |skill|
+              - unless skill.id == nil
+                %tr
+                  %td= skill.name
+                  - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
+                  %td= Endorsement.where(user_skill_id: @user_skill_id).count
+                  %td
+                    = form_for @endorsement do |f|
+                      = hidden_field_tag :user_skill_id, @user_skill_id
+                      = f.submit "Endorse", class: "btn btn-primary"
 %section
   .container
     .row
       .col-lg-12
-        %h1 Endorse Skill
+        %h1 Add Skill
         = form_for @skill do |f|
           .form-group
             = f.text_field :name, class: "form-control", placeholder: "Skill name", required: ""
             = hidden_field_tag :user_id, @user.id
-            = f.submit "Endorse", class: "btn btn-primary"
+            = f.submit "Add Skill", class: "btn btn-primary"

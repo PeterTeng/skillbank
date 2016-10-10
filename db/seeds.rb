@@ -42,7 +42,7 @@ end
 
 #  User Skills
 1.upto(21) do |user_id|
-  1.upto(10) do |skill_id|
+  1.upto(8) do |skill_id|
     UserSkill.create(
       user_id: user_id,
       skill_id: skill_id

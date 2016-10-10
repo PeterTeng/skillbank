@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def show
     @user_skills = @user.skills
     @skill = @user.skills.build
+    @endorsement = Endorsement.new
   end
 
   def new
