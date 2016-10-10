@@ -19,7 +19,8 @@
             %tr
               %th Name
               %th Count
-              %th Action
+              - unless current_user == @user
+                %th Action
           %tbody
             - @user_skills.each do |skill|
               - unless skill.id == nil
@@ -27,10 +28,11 @@
                   %td= skill.name
                   - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
                   %td= Endorsement.where(user_skill_id: @user_skill_id).count
-                  %td
-                    = form_for @endorsement do |f|
-                      = hidden_field_tag :user_skill_id, @user_skill_id
-                      = f.submit "Endorse", class: "btn btn-primary"
+                  - unless current_user == @user
+                    %td
+                      = form_for @endorsement do |f|
+                        = hidden_field_tag :user_skill_id, @user_skill_id
+                        = f.submit "Endorse", class: "btn btn-primary"
 %section
   .container
     .row
