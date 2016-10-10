@@ -1,14 +1,17 @@
-%section.bg-primary
-  .container
-    .row
-      .col-lg-12.text-center
-        %h4= @user.username
-        %h4= @user.email
 %header
   .container
     .row
       .col-lg-12
         %img.img-responsive{:alt => "", :src => "https://placeholdit.imgix.net/~text?txtsize=33&txt=200%C3%97200&w=200&h=200"}/
+        .intro-text
+          %span.username= @user.username
+          %hr
+          - @total_endorsement_count = 0
+          - @user_skills.each do |skill|
+            - unless skill.id == nil
+              - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
+              - @total_endorsement_count = @total_endorsement_count + Endorsement.where(user_skill_id: @user_skill_id).count
+          %span.skills= "#{pluralize(@user.skills.count, "skill")} | #{pluralize(@total_endorsement_count, "endorsement")}"
 %section.bg-warning.pd-b-xl
   .container
     .row
@@ -29,7 +32,7 @@
                   - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
                   %td
                     %button.btn.btn-info.btn-xs{"data-target" => "#m#{@user_skill_id}", "data-toggle" => "modal", :type => "button"} Endorsed by
-                    = "#{pluralize(Endorsement.where(user_skill_id: @user_skill_id).count, "person")}." 
+                    = "#{pluralize(Endorsement.where(user_skill_id: @user_skill_id).count, "person")}"
                     %div{id: "m#{@user_skill_id}", class: "modal fade", role: "dialog"}
                       .modal-dialog
                         .modal-content
