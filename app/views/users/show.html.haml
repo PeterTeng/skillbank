@@ -48,9 +48,13 @@
                   -#   %td= User.find(ids.user_id).username
                   - unless current_user == @user
                     %td
-                      = form_for @endorsement do |f|
-                        = hidden_field_tag :user_skill_id, @user_skill_id
-                        = f.submit "Endorse", class: "btn btn-primary"
+                      - if current_user.endorsed_skills.where(user_id: @user.id, skill_id: skill.id) == []
+                        = form_for @endorsement do |f|
+                          = hidden_field_tag :user_skill_id, @user_skill_id
+                          = f.submit "Endorse", class: "btn btn-primary"
+                      - else
+                        - @endorsement_id = Endorsement.find_by(user_id: current_user.id, user_skill_id: @user_skill_id).id
+                        = link_to "REMOVE", endorsement_path(@endorsement_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
 %section
   .container
     .row
