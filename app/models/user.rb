@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :skills, through: :user_skills
 
   has_many :endorsements
-  has_many :endorsed_skills, through: :endorsements, source: :skill
+  has_many :endorsed_skills, through: :endorsements, source: :user_skill
 
   #  attr_accessor
   attr_accessor :remember_token
