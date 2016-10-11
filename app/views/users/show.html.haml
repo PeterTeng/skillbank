@@ -22,8 +22,9 @@
             %tr
               %th Name
               %th Count
-              - unless current_user == @user
-                %th Action
+              - if current_user != nil
+                - unless current_user == @user
+                  %th Action
           %tbody
             - @user_skills.each do |skill|
               - unless skill.id == nil
@@ -46,22 +47,24 @@
                             %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
                   -# - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
                   -#   %td= User.find(ids.user_id).username
-                  - unless current_user == @user
-                    %td
-                      - if current_user.endorsed_skills.where(user_id: @user.id, skill_id: skill.id) == []
-                        = form_for @endorsement do |f|
-                          = hidden_field_tag :user_skill_id, @user_skill_id
-                          = f.submit "Endorse", class: "btn btn-primary"
-                      - else
-                        - @endorsement_id = Endorsement.find_by(user_id: current_user.id, user_skill_id: @user_skill_id).id
-                        = link_to "REMOVE", endorsement_path(@endorsement_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-%section
-  .container
-    .row
-      .col-lg-12
-        %h1 Add Skill
-        = form_for @skill do |f|
-          .form-group
-            = f.text_field :name, class: "form-control", placeholder: "Skill name", required: ""
-            = hidden_field_tag :user_id, @user.id
-            = f.submit "Add Skill", class: "btn btn-primary"
+                  - if current_user != nil
+                    - unless current_user == @user
+                      %td
+                        - if current_user.endorsed_skills.where(user_id: @user.id, skill_id: skill.id) == []
+                          = form_for @endorsement do |f|
+                            = hidden_field_tag :user_skill_id, @user_skill_id
+                            = f.submit "Endorse", class: "btn btn-primary"
+                        - else
+                          - @endorsement_id = Endorsement.find_by(user_id: current_user.id, user_skill_id: @user_skill_id).id
+                          = link_to "REMOVE", endorsement_path(@endorsement_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+- if current_user != nil
+  %section
+    .container
+      .row
+        .col-lg-12
+          %h1 Add Skill
+          = form_for @skill do |f|
+            .form-group
+              = f.text_field :name, class: "form-control", placeholder: "Skill name", required: ""
+              = hidden_field_tag :user_id, @user.id
+              = f.submit "Add Skill", class: "btn btn-primary"
