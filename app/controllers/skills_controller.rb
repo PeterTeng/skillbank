@@ -5,7 +5,7 @@ class SkillsController < BaseController
 
   def show
     @skill = Skill.find(params[:id])
-    @skill_users = @skill.users
+    @skill_users = @skill.users.page(params[:page])
   end
 
   def create

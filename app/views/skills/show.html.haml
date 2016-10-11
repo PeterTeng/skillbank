@@ -1,11 +1,23 @@
-%section
+%section.bg-navy
   .container
     .row
       .col-lg-12
         %h1= @skill.name
+%section.bg-teal
   .container
     .row
       .col-lg-12
         %h2 Who have this skill
-        - @skill_users.each do |user|
-          %p= user.username
+      .col-lg-12
+        = page_entries_info @skill_users
+        %table.table.table-bordered.table-responsive
+          %thead
+            %tr
+              %th Name
+              %th Action
+          %tbody
+            - @skill_users.each do |user|
+              %tr
+                %td= user.username
+                %th= link_to "Profile", user_path(user), class: "btn btn-default"
+        = paginate @skill_users
