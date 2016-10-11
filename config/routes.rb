@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
-  resources :users, only: [:show, :new, :create]
+  resources :users, only: [:index, :show, :new, :create]
   resources :skills, only: [:index, :show, :new, :create] do
     get 'page/:page', :action => :index, :on => :collection
   end
