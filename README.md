@@ -25,6 +25,9 @@
 
 Visit [http://skillbanker.herokuapp.com](http://skillbanker.herokuapp.com) for production
 
+### GIF
+![](https://github.com/PeterTeng/skillbank/blob/master/sample.gif)
+
 ## Frameworks
 
 - Bootstrap
