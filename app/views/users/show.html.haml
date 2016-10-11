@@ -17,46 +17,49 @@
     .row
       .col-lg-12
         %h1= "#{@user.username}'s Skills"
-        %table.table
-          %thead
-            %tr
-              %th Name
-              %th Count
-              - if current_user != nil
-                - unless current_user == @user
-                  %th Action
-          %tbody
-            - @user_skills.each do |skill|
-              - unless skill.id == nil
-                %tr
-                  %td= link_to skill.name, skill_path(skill)
-                  - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
-                  %td
-                    %button.btn.btn-info.btn-xs{"data-target" => "#m#{@user_skill_id}", "data-toggle" => "modal", :type => "button"} Endorsed by
-                    = "#{pluralize(Endorsement.where(user_skill_id: @user_skill_id).count, "person")}"
-                    %div{id: "m#{@user_skill_id}", class: "modal fade", role: "dialog"}
-                      .modal-dialog
-                        .modal-content
-                          .modal-header
-                            %button.close{"data-dismiss" => "modal", :type => "button"} ×
-                            %h4.modal-title Endorsed by...
-                          .modal-body
-                            - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
-                              %p= User.find(ids.user_id).username
-                          .modal-footer
-                            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-                  -# - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
-                  -#   %td= User.find(ids.user_id).username
-                  - if current_user != nil
-                    - unless current_user == @user
-                      %td
-                        - if current_user.endorsed_skills.where(user_id: @user.id, skill_id: skill.id) == []
-                          = form_for @endorsement do |f|
-                            = hidden_field_tag :user_skill_id, @user_skill_id
-                            = f.submit "Endorse", class: "btn btn-primary"
-                        - else
-                          - @endorsement_id = Endorsement.find_by(user_id: current_user.id, user_skill_id: @user_skill_id).id
-                          = link_to "REMOVE", endorsement_path(@endorsement_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+        - if @user_skills.count <= 1
+          %h3 No Data... Add skill!
+        - else
+          %table.table
+            %thead
+              %tr
+                %th Name
+                %th Count
+                - if current_user != nil
+                  - unless current_user == @user
+                    %th Action
+            %tbody
+              - @user_skills.each do |skill|
+                - unless skill.id == nil
+                  %tr
+                    %td= link_to skill.name, skill_path(skill)
+                    - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
+                    %td
+                      %button.btn.btn-info.btn-xs{"data-target" => "#m#{@user_skill_id}", "data-toggle" => "modal", :type => "button"} Endorsed by
+                      = "#{pluralize(Endorsement.where(user_skill_id: @user_skill_id).count, "person")}"
+                      %div{id: "m#{@user_skill_id}", class: "modal fade", role: "dialog"}
+                        .modal-dialog
+                          .modal-content
+                            .modal-header
+                              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                              %h4.modal-title Endorsed by...
+                            .modal-body
+                              - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
+                                %p= User.find(ids.user_id).username
+                            .modal-footer
+                              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+                    -# - Endorsement.where(user_skill_id: @user_skill_id).each do |ids|
+                    -#   %td= User.find(ids.user_id).username
+                    - if current_user != nil
+                      - unless current_user == @user
+                        %td
+                          - if current_user.endorsed_skills.where(user_id: @user.id, skill_id: skill.id) == []
+                            = form_for @endorsement do |f|
+                              = hidden_field_tag :user_skill_id, @user_skill_id
+                              = f.submit "Endorse", class: "btn btn-primary"
+                          - else
+                            - @endorsement_id = Endorsement.find_by(user_id: current_user.id, user_skill_id: @user_skill_id).id
+                            = link_to "REMOVE", endorsement_path(@endorsement_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
 - if current_user != nil
   %section
     .container
