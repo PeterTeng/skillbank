@@ -1,0 +1,18 @@
+%section.bg-dark
+  .container
+    .row
+      .col-lg-12
+        %h1 All Users
+        %table.table
+          %thead
+            %tr
+              %th Username
+              %th Skill Count
+              %th Action
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= user.username
+                %td= user.skills.count
+                %td
+                  = link_to "Show", user_path(user), class: "btn btn-info btn-sm"
