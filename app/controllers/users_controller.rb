@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: :show
 
   def show
+    @user_skills = @user.skills
+    @skill = @user.skills.build
+    @endorsement = Endorsement.new unless current_user == @user
   end
 
   def new
