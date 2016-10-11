@@ -29,7 +29,7 @@
             - @user_skills.each do |skill|
               - unless skill.id == nil
                 %tr
-                  %td= skill.name
+                  %td= link_to skill.name, skill_path(skill)
                   - @user_skill_id = UserSkill.where(user_id: @user.id, skill_id: skill.id).ids.first
                   %td
                     %button.btn.btn-info.btn-xs{"data-target" => "#m#{@user_skill_id}", "data-toggle" => "modal", :type => "button"} Endorsed by
