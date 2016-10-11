@@ -23,7 +23,7 @@
   - Endorse others skill by clicking "endorse!"
   - Remove endorsement
 
-Visit [http://skillbanker.herokuapp.com/users/22](http://skillbanker.herokuapp.com/users/22) for production
+Visit [http://skillbanker.herokuapp.com](http://skillbanker.herokuapp.com) for production
 
 ## Frameworks
 
