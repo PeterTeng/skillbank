@@ -11,19 +11,33 @@ class SkillsController < BaseController
   def create
     #  Params :user_id passed from form in users/show with hidden_field_tag
     @user = User.find(params[:user_id])
-    @skill = @user.skills.build(skill_params)
-    if @skill.save
+    #  Check if skill name exist
+    if Skill.find_by(name: params[:skill][:name]).nil?
+      @skill = @user.skills.build(skill_params)
+      if @skill.save
+        @skill_user = UserSkill.create(
+          user_id: @user.id,
+          skill_id: @skill.id
+        )
+        if @skill_user.save
+          redirect_to @user
+        else
+          render 'welcome/index'
+        end
+      else
+        render 'welcome/index'
+      end
+    else
+      skill_id = Skill.find_by(name: params[:skill][:name]).id
       @skill_user = UserSkill.create(
         user_id: @user.id,
-        skill_id: @skill.id
+        skill_id: skill_id
       )
       if @skill_user.save
         redirect_to @user
       else
         render 'welcome/index'
       end
-    else
-      render 'welcome/index'
     end
   end
 
