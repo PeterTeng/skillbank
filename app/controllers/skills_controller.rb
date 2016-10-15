@@ -22,10 +22,10 @@ class SkillsController < BaseController
         if @skill_user.save
           redirect_to @user
         else
-          render 'welcome/index'
+          redirect_to @user
         end
       else
-        render 'welcome/index'
+        redirect_to @user
       end
     else
       skill_id = Skill.find_by(name: params[:skill][:name]).id
@@ -36,7 +36,7 @@ class SkillsController < BaseController
       if @skill_user.save
         redirect_to @user
       else
-        render 'welcome/index'
+        redirect_to @user
       end
     end
   end
