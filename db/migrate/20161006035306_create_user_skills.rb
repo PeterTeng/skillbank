@@ -6,6 +6,8 @@ class CreateUserSkills < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :user_skills, :user_id
+    add_index :user_skills, :skill_id
     add_index :user_skills, [:user_id, :skill_id], unique: true
   end
 end

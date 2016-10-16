@@ -40,7 +40,9 @@ ActiveRecord::Schema.define(version: 20161006035306) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "user_skills", ["skill_id"], name: "index_user_skills_on_skill_id", using: :btree
   add_index "user_skills", ["user_id", "skill_id"], name: "index_user_skills_on_user_id_and_skill_id", unique: true, using: :btree
+  add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
