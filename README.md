@@ -1,4 +1,4 @@
-# SKillBank
+# SkillBank
 
 ## Table of Contents
 
