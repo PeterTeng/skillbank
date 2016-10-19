@@ -15,7 +15,7 @@ User.create(
 )
 
 #  20 Sample Users
-1.upto(20) do |i|
+1.upto(501) do |i|
   User.create(
     username: "SeedUser#{i}",
     email: "SeedUser#{i}@abc.com",
@@ -51,7 +51,7 @@ end
 end
 
 #  Endorsements
-2.upto(6) do |user_id|
+2.upto(501) do |user_id|
   1.upto(5) do |user_skill_id|
     Endorsement.create(
       user_id: user_id,
