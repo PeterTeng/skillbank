@@ -53,6 +53,8 @@ Must install `Postgresql` in your development environment.
 
 1. `rake croutes` Pretty version of rake routes
 1. `rake db:init` drop, create, migrate, seed
+1. `rake open:site` Open production site
+1. `rake open:github` Open project's github page
 
 ## Try next
 
