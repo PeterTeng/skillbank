@@ -9,7 +9,7 @@ class EndorsementsController < BaseController
   end
 
   def destroy
-    @endorsement = Endorsement.find(params[:id])
+    @endorsement = current_user.endorsements.find(params[:id])
     @endorsement.destroy
     redirect_to :back
   end
