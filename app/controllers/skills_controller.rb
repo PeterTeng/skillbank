@@ -1,6 +1,6 @@
 class SkillsController < BaseController
   def index
-    @skills = Skill.all
+    @skills = Skill.page(params[:page])
   end
 
   def show
