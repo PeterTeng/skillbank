@@ -3,6 +3,7 @@
     .row
       .col-lg-12
         %h1 All Users
+        = page_entries_info @users
         %table.table
           %thead
             %tr
@@ -16,3 +17,4 @@
                 %td= user.skills.count
                 %td
                   = link_to "Show", user_path(user), class: "btn btn-info btn-sm"
+        = paginate @users
